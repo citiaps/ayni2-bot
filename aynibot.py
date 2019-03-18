@@ -3,8 +3,9 @@
 import os
 #import dropbox
 import requests
+from telegram import (ReplyKeyboardMarkup, ReplyKeyboardRemove)
 
-from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters)
+from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, RegexHandler, ConversationHandler)
 import logging
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
@@ -28,6 +29,10 @@ def start(bot, update):
     iduser.append (user.id)
     update.message.reply_text('Hola {}'.format(update.message.from_user.username)+'id:{}'.format(update.message.from_user.id))
 
+    reply_keyboard = [['Si', 'No']]
+    update.message.reply_text(
+        'Hola! la emergencia actual corresponde a blablabla, deseas participar como voluntario?',
+        reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     # logger.info(iduser)
     # logger.info(len(iduser))
 
